@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'dva';
-import {Table,Pagination,Popconfirm,Progress,Card,Badge} from 'antd';
+import * as Ant  from 'antd';
 import styles from './Users.css';
 import {PAGE_SIZE} from '../../constants';
 
@@ -57,21 +57,18 @@ function Users({list:dataSource,total,page:current}) {
        		<h2>用户表单管理系统</h2>
 	       		 
        		<br />
-       		
-       		<Card 
-       			title = "fuck,haven't appear"
+       		 
+       		<Ant.Card 
+       			title = "数据暂未出现"
        			extra = "show"
        			loading = {true}
 
        		/>
        		<br />
-       		<Progress 
-       			type = "circle"
-       			percent = {66}
-       		/>
+       		 
        		<br />
        		<br />
-       		<Pagination
+       		<Ant.Pagination
        			className = "ant-table-pagination"
        			total = {total}
        			current = {current}
