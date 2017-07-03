@@ -1,9 +1,12 @@
 import React from 'react';
 import {connect} from 'dva';
 import * as Ant  from 'antd';
+import {Button} from 'antd';
 import styles from './Users.css';
 import {PAGE_SIZE} from '../../constants';
 import {routerRedux} from 'dva/router';
+import UserModal from './UserModal';
+
 
 function Users({dispatch,list:dataSource,loading,total,page:current}) {
 
@@ -20,6 +23,20 @@ function Users({dispatch,list:dataSource,loading,total,page:current}) {
 			pathname:'/users',
 			query:{page},
 		}));
+	}
+
+	function editHandler(id,values){
+		dispatch({
+			type:'users/patch',
+			payload:{id,values},
+		});
+	}
+
+	function createHandler(values){
+		dispatch({
+			type:'users/create',
+			payload:values,
+		});
 	}
 
 	console.log(`数据源为 ${dataSource}`)
@@ -45,11 +62,13 @@ function Users({dispatch,list:dataSource,loading,total,page:current}) {
 		{
 	       title: 'Operation',
 	       key: 'operation',
-	       render: (record) => (
+	       render: (text,record) => (
 	         <span className={styles.operation}>
-	           <a href="">Edit     </a>
-	           <Ant.Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, record.id)} onChange = {pageChangeHandler}>
-	             <a href="">   Delete</a>
+	            <UserModal record = {record} onOk = {editHandler.bind(null,record.id)}>
+	            	<a>Edit</a>
+	            </UserModal>
+	           <Ant.Popconfirm title="Confirm to delete?" onConfirm={deleteHandler.bind(null, record.id)}>
+	            	<a href="">Delete</a>
 	           </Ant.Popconfirm>
 	         </span>
 	       ),
@@ -62,8 +81,15 @@ function Users({dispatch,list:dataSource,loading,total,page:current}) {
   return (
     <div className={styles.normal}>
        <div>
-       		<h2>用户表单管理系统</h2> 		 
-       		<br />
+       		 <div className = {styles.create}>
+       		 	<UserModal record={{}} onOk={createHandler}>
+           			 <Button type="primary">Create User</Button>
+          		</UserModal>
+          		
+          		<br/>
+          		<br/>
+       		 	
+       		 </div>
        		 <Ant.Table
 	          columns={colums}
 	          dataSource={dataSource}
