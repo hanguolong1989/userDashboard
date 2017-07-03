@@ -2,7 +2,9 @@
 .normal {
 }
 
-
+.create{
+	margin-bottom: 1.5 em;
+}
 .operation a {
 	margin:0.5 em;
 }
