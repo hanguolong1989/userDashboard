@@ -18,6 +18,8 @@ export default {
   effects: {
   	*fetch({payload:{page = 1}},{call,put}){
   		const {data,headers} = yield call (usersService.fetch,{page});
+
+      console.log(`请求到的数据为${data,headers}`);
   		// yield put ({type:'save',payload:{data,total:headers['x-total-count']}});
   		yield put ({
   			type:'save',
