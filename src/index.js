@@ -1,14 +1,10 @@
 import dva from 'dva';
 import './index.css';
 import createLoading from 'dva-loading';
-import message from 'antd';
+
 
 // 1. Initialize
-const app = dva({
-	onError(e){
-		message.error(e.message,/*duration*/3);
-	},
-});
+const app = dva();
 
 console.log(`app顶层数据${app._store}`);
 

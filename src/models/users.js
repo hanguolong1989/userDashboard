@@ -1,8 +1,7 @@
 
 
 import * as usersService from '../services/users';
-
-
+ 
 export default {
   namespace: 'users',
   state: {
@@ -49,6 +48,7 @@ export default {
       yield put ({type:'fetch',payload:{page}});
     },
   },
+/*订阅方法*/
   subscriptions: {
   	setup({dispatch,history}){
   		return history.listen(({pathname,query}) => {
@@ -57,5 +57,6 @@ export default {
   			}
   		});
   	},
+
   },
 };
